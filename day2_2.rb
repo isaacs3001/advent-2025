@@ -13,18 +13,18 @@ ranges.each do |range|
     s = i.to_s
     len = s.length
     next if len == 1
-    if len.even?
-      half = len / 2
-      if s[0, half] == s[half, half]
-        p i
+
+    found = false
+    (1..(len / 2)).each do |chunk|
+      next unless (len % chunk).zero?               # only consider chunk sizes that evenly divide the length
+      parts = s.chars.each_slice(chunk).map(&:join)
+      if parts.uniq.length == 1
         invalid_sum += i
-      end
-    else
-      if s.chars.uniq.length == 1
-        p i
-        invalid_sum += i
+        found = true
+        break
       end
     end
+    # if found, we already added i; continue to next number
   end
 end
 

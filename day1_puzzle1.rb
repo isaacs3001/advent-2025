@@ -1,4 +1,4 @@
-rotations = File.readlines("day_1.txt", chomp: true)
+rotations = File.readlines("code_day_1.txt", chomp: true)
 current_point = 50
 count = 0 
 for rotation in rotations 
@@ -26,7 +26,7 @@ end
 
 p count
 
-rotations = File.readlines("day_1.txt", chomp: true)
+rotations = File.readlines("code_day_1.txt", chomp: true)
 current_point = 50
 count = 0 
 
