@@ -5,7 +5,7 @@
 #     bank_in_array = bank.to_i.digits.reverse
 #     first_cell = bank_in_array[0...-1].max
 #     first_cell_index = bank_in_array.index(first_cell)
-#     highest_from_remaining_cells = bank_in_array.slice!(0...first_cell_index).max.to_s  slice is not the best way also 
+#     highest_from_remaining_cells = bank_in_array.slice!(0...first_cell_index).max.to_s  
 #     combined_cell = (first_cell.to_s + highest_from_remaining_cells).to_i
 #     total_joltage += combined_cell
 # end
@@ -67,15 +67,28 @@ banks = File.readlines("day_3.txt", chomp: true)
 
 total_joltage = 0
 banks.each do |bank|
-  bank = bank.strip
+  number = bank.strip
   next if bank.empty?
-  joltage = []
+  # p bank
   # digits left-to-right
-  bank_in_array = bank.chars.map(&:to_i)   # safer than Integer#digits.reverse
-  bank_in_array.each do |i|
-    joltage.
-    joltage.append(i)
+
+  k = 12                      # how many digits we want
+  remove = number.length - k  # how many we can delete
+
+  stack = []
+
+  number.each_char do |digit|
+    while !stack.empty? && remove > 0 && stack[-1] < digit
+      stack.pop
+      remove -= 1
+    end
+
+    stack << digit
   end
 
-
+  # Take only first 12 digits
+  result = stack[0, k].join
+  total_joltage += result.to_i
 end
+
+p total_joltage
