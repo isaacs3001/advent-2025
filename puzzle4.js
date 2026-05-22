@@ -6,7 +6,6 @@ fs.readFile('day_4.txt', 'utf8', (err, data) => {
         .trim()
         .split('\n')
         .map(row => row.split(''));
-    console.log("paperrowns", paper_rows)
     let updated_grid = paper_rows.map(row => [...row]);
 
     let roll_count = 0;
